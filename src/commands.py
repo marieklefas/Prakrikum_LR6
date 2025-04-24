@@ -20,6 +20,7 @@ def cmd_help(args, work_dir):
 
 
 def cmd_newDir(args, work_dir):
+    '''Создание новой директории. Требуется ввести название папки либо сразу с командой либо позже.'''
     if not args:
         dir_name = input(f'Введите название новой папки: ')
     else:
@@ -33,6 +34,7 @@ def cmd_newDir(args, work_dir):
 
 
 def cmd_delDir(args, work_dir):
+    '''Удаление существующей директории. Необходимо ввести название папки.'''
     if not args:
         dir_name = input(f'Введите название папки, которую хотите удалить: ')
     else:
@@ -55,6 +57,7 @@ def cmd_delDir(args, work_dir):
 
 
 def cms_openDir(args, work_dir):
+    '''Переход в дочернюю директорию. Необходимо ввести название директории или путь в формате dir1/dir2'''
     if not args:
         dir_name = input(f'Введите название папки, которую хотите открыть: ')
     else:
@@ -67,7 +70,7 @@ def cms_openDir(args, work_dir):
 
 
 def cmd_closeDir(args, work_dir):
-    '''Поднимается в родительскую директорию указанной директории.'''
+    '''Переход из дочерней директории в родительскую. Можно подняться на одну директорию выше или, указав путь, подняться на несколько директорий выше.'''
     if not args:
         globals.cur_dir = globals.cur_dir[:globals.cur_dir.rfind('/')]
     else:
@@ -80,10 +83,12 @@ def cmd_closeDir(args, work_dir):
 
 
 def cmd_homeDir(args, work_dir):
+    '''Возвращение в корневую директорию.'''
     globals.cur_dir = ''
 
 
 def cmd_showDir(args, work_dir):
+    '''Демонстрация всех папко и файлов в директории. Принимает на вход название директории.'''
     directory = f'{work_dir}{globals.cur_dir}'
     if not os.path.isdir(directory):
         print(f'Указанный путь не является директорией.')
@@ -101,6 +106,7 @@ def cmd_showDir(args, work_dir):
 
 
 def cmd_newFile(args, work_dir):
+    '''Создание новго файла в текущей директории. Необходимо ввести название файла с расширением в формате name.txt'''
     if not args:
         file_name = input(
             f'Введите название(я) файла(ов) с расширением: ').split()
@@ -120,6 +126,7 @@ def cmd_newFile(args, work_dir):
 
 
 def cmd_delFile(args, work_dir):
+    '''Удаление файла. Необходимо ввести название файла с расширением в формате name.txt'''
     if not args:
         file_name = input(
             f'Введите название(я) файла(ов) с расширением: ').split()
@@ -141,6 +148,7 @@ def cmd_delFile(args, work_dir):
 
 
 def cmd_readFile(args, work_dir):
+    '''Чтение файла в текущей директории. Необходимо ввести название файла с расширением в формате name.txt'''
     if not args:
         file_name = input(
             f'Введите название файла с расширением, который вы хотите прочитать: ').split()
@@ -172,6 +180,7 @@ def cmd_readFile(args, work_dir):
 
 
 def cmd_writeFile(args, work_dir):
+    '''Запись новых данных в существующий файл. Необходимо ввести название файла с расширением в формате name.txt А далее вводить сами данные.'''
     if not args:
         file_name = input(
             f'Введите название файла с расширением, в который вы хотите записать данные: ').split()
@@ -210,6 +219,7 @@ def cmd_writeFile(args, work_dir):
 
 
 def cmd_copyFile(args, work_dir):
+    '''Копирование файла из текущей директории в другую. Необходимо ввести название файла с расширением в формате name.txt'''
     if not args:
         file_name = input(
             f'Введите название файла с расширением, который вы хотите скопировать: ').split()
@@ -251,6 +261,7 @@ def cmd_copyFile(args, work_dir):
 
 
 def cmd_moveFile(args, work_dir):
+    '''Перемещение файла из текущей директории в дочернюю. Необходимо ввести название файла с расширением в формате name.txt'''
     if not args:
         file_name = input(
             f'Введите название файла с расширением, который вы хотите скопировать: ').split()
@@ -292,6 +303,7 @@ def cmd_moveFile(args, work_dir):
 
 
 def cmd_renameFile(args, work_dir):
+    '''Переименовать файл. Необходимо ввести название файла с расширением в формате name.txt'''
     if not args:
         file_name = input(
             f'Введите название файла с расширением, который вы хотите переименовать: ').split()
