@@ -41,7 +41,8 @@ def cmd_delDir(args, work_dir):
     for item in os.listdir(directory):
         full_path = os.path.join(directory, item)
         if item == dir_name:
-            answer = input(f'Вы уверены, что хотите удалить эту директорию? Все файлы в ней будут утеряны. [Y/N] ')
+            answer = input(
+                f'Вы уверены, что хотите удалить эту директорию? Все файлы в ней будут утеряны. [Y/N] ')
             if answer.lower() == 'y':
                 directory = f'{work_dir}{globals.cur_dir}/{dir_name}'
                 shutil.rmtree(directory)
@@ -51,6 +52,7 @@ def cmd_delDir(args, work_dir):
                 return
     else:
         print('Такой директории не существует, либо вы пытаетесь удалить родительскую директорию.')
+
 
 def cms_openDir(args, work_dir):
     if not args:
@@ -80,6 +82,7 @@ def cmd_closeDir(args, work_dir):
 def cmd_homeDir(args, work_dir):
     globals.cur_dir = ''
 
+
 def cmd_showDir(args, work_dir):
     directory = f'{work_dir}{globals.cur_dir}'
     if not os.path.isdir(directory):
@@ -96,9 +99,11 @@ def cmd_showDir(args, work_dir):
     except Exception as e:
         print(f'Ошибка при чтении директории: {e}')
 
+
 def cmd_newFile(args, work_dir):
     if not args:
-        file_name = input(f'Введите название(я) файла(ов) с расширением: ').split()
+        file_name = input(
+            f'Введите название(я) файла(ов) с расширением: ').split()
     else:
         file_name = args
     for file in file_name:
@@ -116,14 +121,16 @@ def cmd_newFile(args, work_dir):
 
 def cmd_delFile(args, work_dir):
     if not args:
-        file_name = input(f'Введите название(я) файла(ов) с расширением: ').split()
+        file_name = input(
+            f'Введите название(я) файла(ов) с расширением: ').split()
     else:
         file_name = args
     for file in file_name:
         if len(file.split('.')) == 2 and all(file.split('.')):
             file_path = f'{work_dir}{globals.cur_dir}/{file}'
             if os.path.isfile(file_path):
-                answer = input(f'Вы уверены, что хотите удалить файл {file}? Данные в нем будут утеряны. [Y/N] ')
+                answer = input(
+                    f'Вы уверены, что хотите удалить файл {file}? Данные в нем будут утеряны. [Y/N] ')
                 if answer.lower() == 'y':
                     os.remove(file_path)
                     print(f'Файл {file} успешно удален.')
@@ -132,9 +139,11 @@ def cmd_delFile(args, work_dir):
         else:
             print(f'Некорректный ввод файла {file}. Повторите попытку.')
 
+
 def cmd_readFile(args, work_dir):
     if not args:
-        file_name = input(f'Введите название файла с расширением, который вы хотите прочитать: ').split()
+        file_name = input(
+            f'Введите название файла с расширением, который вы хотите прочитать: ').split()
         if len(file_name) > 1:
             print('Введите только один файл.')
             return
@@ -145,7 +154,7 @@ def cmd_readFile(args, work_dir):
         return
     else:
         file = args[0]
-    
+
     if len(file.split('.')) == 2 and all(file.split('.')):
         file_path = f'{work_dir}{globals.cur_dir}/{file}'
         if not os.path.isfile(file_path):
@@ -161,9 +170,11 @@ def cmd_readFile(args, work_dir):
     else:
         print(f'Некорректный ввод файла {file}. Повторите попытку.')
 
+
 def cmd_writeFile(args, work_dir):
     if not args:
-        file_name = input(f'Введите название файла с расширением, в который вы хотите записать данные: ').split()
+        file_name = input(
+            f'Введите название файла с расширением, в который вы хотите записать данные: ').split()
         if len(file_name) > 1:
             print('Введите только один файл.')
             return
@@ -174,13 +185,14 @@ def cmd_writeFile(args, work_dir):
         return
     else:
         file = args[0]
-    
+
     if len(file.split('.')) == 2 and all(file.split('.')):
         file_path = f'{work_dir}{globals.cur_dir}/{file}'
         if not os.path.isfile(file_path):
             print(f'Файл {file} не найден.')
         else:
-            print('Введите текст для записи в файл. Чтобы завершить ввод, оставьте строку пустой и нажмите Enter:')
+            print(
+                'Введите текст для записи в файл. Чтобы завершить ввод, оставьте строку пустой и нажмите Enter:')
             lines = []
             while True:
                 line = input()
@@ -192,13 +204,15 @@ def cmd_writeFile(args, work_dir):
                     f.write('\n'.join(lines))
                 print(f'Данные успешно записаны в файл {file}.')
             except Exception as e:
-                print(f'Ошибка при записи в файл: {e}') 
+                print(f'Ошибка при записи в файл: {e}')
     else:
         print(f'Некорректный ввод файла {file}. Повторите попытку.')
 
+
 def cmd_copyFile(args, work_dir):
     if not args:
-        file_name = input(f'Введите название файла с расширением, который вы хотите скопировать: ').split()
+        file_name = input(
+            f'Введите название файла с расширением, который вы хотите скопировать: ').split()
         if len(file_name) > 1:
             print('Введите только один файл.')
             return
@@ -209,13 +223,14 @@ def cmd_copyFile(args, work_dir):
         return
     else:
         file = args[0]
-    
+
     if len(file.split('.')) == 2 and all(file.split('.')):
         file_path = f'{work_dir}{globals.cur_dir}/{file}'
         if not os.path.isfile(file_path):
             print(f'Файл {file} не найден.')
         else:
-            dir_name = input(f'Введите название папки, в которую вы хотите скопировать файл {file}: ')
+            dir_name = input(
+                f'Введите название папки, в которую вы хотите скопировать файл {file}: ')
             directory = f'{work_dir}{globals.cur_dir}'
             for item in os.listdir(directory):
                 new_file_path = os.path.join(directory, item)
@@ -223,19 +238,22 @@ def cmd_copyFile(args, work_dir):
                     new_file_path += f'/{file}'
                     try:
                         shutil.copy2(file_path, new_file_path)
-                        print(f'Файл {file} успешно скопирован в папку {dir_name}.')
+                        print(
+                            f'Файл {file} успешно скопирован в папку {dir_name}.')
                         return
                     except Exception as e:
                         print(f'Ошибка при копировании файла: {e}')
                         return
             else:
-                print('Такой директории не существует.')   
+                print('Такой директории не существует.')
     else:
         print(f'Некорректный ввод файла {file}. Повторите попытку.')
 
+
 def cmd_moveFile(args, work_dir):
     if not args:
-        file_name = input(f'Введите название файла с расширением, который вы хотите скопировать: ').split()
+        file_name = input(
+            f'Введите название файла с расширением, который вы хотите скопировать: ').split()
         if len(file_name) > 1:
             print('Введите только один файл.')
             return
@@ -246,13 +264,14 @@ def cmd_moveFile(args, work_dir):
         return
     else:
         file = args[0]
-    
+
     if len(file.split('.')) == 2 and all(file.split('.')):
         file_path = f'{work_dir}{globals.cur_dir}/{file}'
         if not os.path.isfile(file_path):
             print(f'Файл {file} не найден.')
         else:
-            dir_name = input(f'Введите название папки, в которую вы хотите переместить файл {file}: ')
+            dir_name = input(
+                f'Введите название папки, в которую вы хотите переместить файл {file}: ')
             directory = f'{work_dir}{globals.cur_dir}'
             for item in os.listdir(directory):
                 new_file_path = os.path.join(directory, item)
@@ -260,19 +279,22 @@ def cmd_moveFile(args, work_dir):
                     new_file_path += f'/{file}'
                     try:
                         shutil.move(file_path, new_file_path)
-                        print(f'Файл {file} успешно перемещен в папку {dir_name}.')
+                        print(
+                            f'Файл {file} успешно перемещен в папку {dir_name}.')
                         return
                     except Exception as e:
                         print(f'Ошибка при копировании файла: {e}')
                         return
             else:
-                print('Такой директории не существует.')   
+                print('Такой директории не существует.')
     else:
         print(f'Некорректный ввод файла {file}. Повторите попытку.')
 
+
 def cmd_renameFile(args, work_dir):
     if not args:
-        file_name = input(f'Введите название файла с расширением, который вы хотите переименовать: ').split()
+        file_name = input(
+            f'Введите название файла с расширением, который вы хотите переименовать: ').split()
         if len(file_name) > 1:
             print('Введите только один файл.')
             return
@@ -283,7 +305,7 @@ def cmd_renameFile(args, work_dir):
         return
     else:
         file = args[0]
-    
+
     if len(file.split('.')) == 2 and all(file.split('.')):
         file_path = f'{work_dir}{globals.cur_dir}/{file}'
         if not os.path.isfile(file_path):
@@ -303,10 +325,10 @@ def cmd_renameFile(args, work_dir):
                     except Exception as e:
                         print(f'Ошибка при переименовании файла: {e}')
                 else:
-                    print(f'Некорректный ввод файла {new_file}. Повторите попытку.')
+                    print(
+                        f'Некорректный ввод файла {new_file}. Повторите попытку.')
     else:
         print(f'Некорректный ввод файла {file}. Повторите попытку.')
-
 
 
 allCommands = {

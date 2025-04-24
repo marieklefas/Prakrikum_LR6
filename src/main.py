@@ -2,6 +2,7 @@ import configparser
 from callCommands import find_command
 import globals
 
+
 def load_config():
     config = configparser.ConfigParser()
     config.read('config\config.ini')
