@@ -1,7 +1,6 @@
 import configparser
 from callCommands import find_command
 import globals
-from returnDir import *
 
 def load_config():
     config = configparser.ConfigParser()
@@ -10,9 +9,8 @@ def load_config():
 
 
 def main():
-    work_dir = load_config()    # C:\University\praktikum_LR6_workdir
+    work_dir = load_config()
     print('user: ', work_dir)
-    #print(os.path.abspath(work_dir))
 
     print("Добро пожаловать в файловый менеджер. Введите 'help' для списка команд.")
 
